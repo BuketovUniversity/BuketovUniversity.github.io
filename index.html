@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Расчёт мощности ветрогенератора с учётом плотности воздушного потока</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <meta name="theme-color" content="#7952b3">
+</head>
+<body>
+<div class="container">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+        <div class="row">
+            <div class="col-md-3 col-12">
+                <img src="logo.png" alt="" style="height: 50px;">
+            </div>
+            <div class="col-md-9 col-12 text-center">
+                <h3>НАО «Карагандинский университет им. академика Е. А. Букетова»</h3>
+            </div>
+        </div>
+    </header>
+</div>
+
+<main>
+
+    <div class="container">
+        <div class="px-4 pt-5 my-5 text-center">
+            <h1 class="display-4 fw-bold mb-3">
+                Расчёт мощности ветрогенератора с учётом плотности воздушного потока
+            </h1>
+            <p style="font-size: 20pt;">
+                P = 0,5 ξπR<sup>2</sup>V<sup>3</sup>ρη<sub>р</sub>η<sub>г</sub>
+            </p>
+            <div class="col mx-auto">
+                <form method="GET">
+                    <div class="row">
+                        <div class="col-lg-6 mb-3">
+                            <label for="var1" class="form-label">
+                                <i>&#958;</i> - коэффициент использования энергии ветра
+                            </label>
+                            <input type="number" class="form-control" required id="var1">
+                        </div>
+                        <div class="col-lg-6 mb-3">
+                            <label for="var2" class="form-label">
+                                <i>R</i> - радиус ротора, м
+                            </label>
+                            <input type="number" class="form-control" required id="var2">
+                        </div>
+                        <div class="col-lg-6 mb-3">
+                            <label for="var3" class="form-label">
+                                <i>V</i> - скорость воздушного потока, м/с
+                            </label>
+                            <input type="number" class="form-control" required id="var3">
+                        </div>
+                        <div class="col-lg-6 mb-3">
+                            <label for="var4" class="form-label">
+                                <i>ρ</i> - плотность воздуха, кг/м<sup>3</sup>
+                            </label>
+                            <input type="number" class="form-control" required id="var4">
+                        </div>
+                        <div class="col-lg-6 mb-3">
+                            <label for="var5" class="form-label">
+                                <i>η<sub>р</sub></i> - КПД редуктора, %
+                            </label>
+                            <input type="number" class="form-control" required id="var5">
+                        </div>
+                        <div class="col-lg-6 mb-3">
+                            <label for="var6" class="form-label">
+                                <i>η<sub>г</sub></i> - КПД генератора, %
+                            </label>
+                            <input type="number" class="form-control" required id="var6">
+                        </div>
+                    </div>
+                </form>
+                <div id="result" class="mb-3">
+
+                </div>
+                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
+                    <button type="submit" class="btn btn-primary btn-lg px-4 me-sm-3" onclick="getResult()">
+                        Рассчитать
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary btn-lg px-4" onclick="clean()">
+                        Очистить
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<div class="container">
+    <footer class="py-3 my-4">
+        <p class="text-center text-muted">
+            &copy; Алхамина Зарина МТЭР-62<br>
+            Караганда - 2021<br>
+        </p>
+    </footer>
+</div>
+
+
+<script>
+    function getResult() {
+        const var1 = document.getElementById('var1').value;
+        const var2 = document.getElementById('var2').value;
+        const var3 = document.getElementById('var3').value;
+        const var4 = document.getElementById('var4').value;
+        const var5 = document.getElementById('var5').value;
+        const var6 = document.getElementById('var6').value;
+
+        const p = 0.5 * var1 * Math.PI * Math.pow(var2, 2) * Math.pow(var3, 3) * var4 * var5 * var6;
+        document.getElementById('result').innerHTML = "<b>Мощность ветряного потока (p) = " + p + ' Вт</b>';
+    }
+
+    function clean() {
+        document.getElementById('var1').value = '';
+        document.getElementById('var2').value = '';
+        document.getElementById('var3').value = '';
+        document.getElementById('var4').value = '';
+        document.getElementById('var5').value = '';
+        document.getElementById('var6').value = '';
+        document.getElementById('result').innerHTML = '';
+    }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+</body>
+</html>
